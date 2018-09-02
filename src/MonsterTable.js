@@ -36,8 +36,12 @@ class TableBody extends Component {
         let monstersToDisplay = monsters.filter(monster => monster.name.toLowerCase().includes(this.props.searchString));
 
         const rows = monstersToDisplay.map((monster, index) => {
+
+            // Get the unique ID from the end of the URL
+            const urlId = monster.url.split("/").slice(-1)[0];
+            
             return (
-                <tr key={index}>
+                <tr key={urlId}>
                     <td><button id="Button" onClick={() => console.log("You clicked monster", this)}>+</button></td>
                     <td>{monster.name}</td>
                     <td>{monster.url}</td>

@@ -3,8 +3,6 @@ import React, {Component} from 'react';
 class SearchBox extends Component {
     constructor(props) {
         super(props);
-
-        console.log(this.searchString);
     }
 
     render() {
