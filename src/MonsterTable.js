@@ -4,6 +4,7 @@ const TableHeader = () => {
     return (
         <thead>
             <tr>
+                <th>Add</th>
                 <th>Name</th>
                 <th>URL</th>
             </tr>
@@ -37,8 +38,9 @@ class TableBody extends Component {
         const rows = monstersToDisplay.map((monster, index) => {
             return (
                 <tr key={index}>
+                    <td><button id="Button" onClick={() => console.log("You clicked monster", this)}>+</button></td>
                     <td>{monster.name}</td>
-                    <td>{this.props.testValue}</td>
+                    <td>{monster.url}</td>
                 </tr>
             );
         });

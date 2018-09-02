@@ -7,25 +7,13 @@ class SearchBox extends Component {
         console.log(this.searchString);
     }
 
-    handleChange = (event) => {
-        const {value} = event.target;
-
-        // console.log("Typing");
-        // this.setState({
-        //     filterString: value
-        // })
-
-        // this.props.
-
-        this.props.handleTyping(value);
-    };
-
-    // 
-
     render() {
         return (
             <div>
-                <input type="text" value={this.props.filterString} onChange={this.handleChange} />
+                <input type="text" value={this.props.filterString} onChange={(event) => {
+                    const {value} = event.target;
+                    this.props.handleTyping(value);
+                }} />
             </div>
         );
         
