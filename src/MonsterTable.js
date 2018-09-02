@@ -35,14 +35,17 @@ class TableBody extends Component {
         // Filter monsters using searchString, converting both sides to lowercase
         let monstersToDisplay = monsters.filter(monster => monster.name.toLowerCase().includes(this.props.searchString.toLowerCase()));
 
+        console.log(this);
+
         const rows = monstersToDisplay.map((monster, index) => {
 
             // Get the unique ID from the end of the URL
             const urlId = monster.url.split("/").slice(-1)[0];
             
+            
             return (
                 <tr key={urlId}>
-                    <td><button onClick={() => console.log("You clicked monster", urlId)}>+</button></td>
+                    <td><button onClick={() => this.props.monsterAdded(urlId)}>+</button></td>
                     <td>{monster.name}</td>
                     <td>{monster.url}</td>
                 </tr>
@@ -59,7 +62,7 @@ class MonsterTable extends Component {
         return (
             <table>
                 <TableHeader />
-                <TableBody searchString={this.props.searchString} />
+                <TableBody searchString={this.props.searchString} monsterAdded={this.props.monsterAdded} />
             </table>
         );
     }
