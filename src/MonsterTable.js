@@ -32,8 +32,8 @@ class TableBody extends Component {
     render() {
         const { monsters } = this.state;
 
-        // Filter monsters using searchString
-        let monstersToDisplay = monsters.filter(monster => monster.name.toLowerCase().includes(this.props.searchString));
+        // Filter monsters using searchString, converting both sides to lowercase
+        let monstersToDisplay = monsters.filter(monster => monster.name.toLowerCase().includes(this.props.searchString.toLowerCase()));
 
         const rows = monstersToDisplay.map((monster, index) => {
 
@@ -42,14 +42,12 @@ class TableBody extends Component {
             
             return (
                 <tr key={urlId}>
-                    <td><button id="Button" onClick={() => console.log("You clicked monster", this)}>+</button></td>
+                    <td><button onClick={() => console.log("You clicked monster", urlId)}>+</button></td>
                     <td>{monster.name}</td>
                     <td>{monster.url}</td>
                 </tr>
             );
         });
-
-        console.log(rows);
     
         return <tbody>{rows}</tbody>;
     }
