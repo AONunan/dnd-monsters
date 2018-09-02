@@ -18,33 +18,6 @@ class TableBody extends Component {
         url: "http://www.dnd5eapi.co/api/monsters/"
     };
 
-    // const monsters = [
-    //     {
-    //         "name": "Dragon",
-    //         "hit_points": 195
-    //     },
-    //     {
-    //         "name": "Bandit",
-    //         "hit_points": 11
-    //     },
-    //     {
-    //         "name": "Fire Giant",
-    //         "hit_points": 162
-    //     },
-    //     {
-    //         "name": "Goblin",
-    //         "hit_points": 7
-    //     },
-    //     {
-    //         "name": "Vampire",
-    //         "hit_points": 45
-    //     },
-    //     {
-    //         "name": "Orc",
-    //         "hit_points": 70
-    //     },
-    // ];
-
     componentDidMount() {
         fetch(this.state.url)
         .then(response => response.json())
@@ -58,16 +31,19 @@ class TableBody extends Component {
     render() {
         const { monsters } = this.state;
 
+        // Filter monsters using searchString
         let monstersToDisplay = monsters.filter(monster => monster.name.toLowerCase().includes(this.props.searchString));
 
-        const rows = monstersToDisplay.map((monster) => {
+        const rows = monstersToDisplay.map((monster, index) => {
             return (
-                <tr>
+                <tr key={index}>
                     <td>{monster.name}</td>
                     <td>{this.props.testValue}</td>
                 </tr>
             );
         });
+
+        console.log(rows);
     
         return <tbody>{rows}</tbody>;
     }
