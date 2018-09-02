@@ -35,8 +35,6 @@ class TableBody extends Component {
         // Filter monsters using searchString, converting both sides to lowercase
         let monstersToDisplay = monsters.filter(monster => monster.name.toLowerCase().includes(this.props.searchString.toLowerCase()));
 
-        console.log(this);
-
         const rows = monstersToDisplay.map((monster, index) => {
 
             // Get the unique ID from the end of the URL
