@@ -58,13 +58,13 @@ class TableBody extends Component {
     render() {
         const { monsters } = this.state;
 
-        let monstersToDisplay = monsters.filter(monster => monster.name.includes("Dragon"));
+        let monstersToDisplay = monsters.filter(monster => monster.name.toLowerCase().includes(this.props.searchString));
 
         const rows = monstersToDisplay.map((monster) => {
             return (
                 <tr>
                     <td>{monster.name}</td>
-                    <td>{monster.url}</td>
+                    <td>{this.props.testValue}</td>
                 </tr>
             );
         });
@@ -79,7 +79,7 @@ class MonsterTable extends Component {
         return (
             <table>
                 <TableHeader />
-                <TableBody searchString={this.props.filterString} />
+                <TableBody searchString={this.props.searchString} />
             </table>
         );
     }

@@ -5,12 +5,12 @@ import SearchBox from './SearchBox'
 class App extends Component {
 
     state = {
-        filterString: ""
+        searchString: ""
     };
 
     handleTyping = text => {
         this.setState({
-            filterString: text
+            searchString: text
         })
     };
 
@@ -19,8 +19,8 @@ class App extends Component {
             <div className="App">
                 <h1>D&D Monsters</h1>
                 <SearchBox handleTyping={this.handleTyping} />
-                <p>Filter string (App component): {this.state.filterString}</p>
-                <MonsterTable filterString={this.state.filterString} />
+                <p>Filter string (App component): {this.state.searchString}</p>
+                <MonsterTable searchString={this.state.searchString} />
             </div>
 
             
