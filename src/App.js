@@ -11,13 +11,14 @@ class App extends Component {
         addedMonsters: []
     };
 
-    monsterAdded = (monsterId) => {
-        if(this.state.addedMonsters.includes(monsterId)) {
+    monsterAdded = (newMonsterValue) => {
+        if(this.state.addedMonsters.includes(newMonsterValue)) {
             console.log("Monster already in array");
         } else {
-            this.state.addedMonsters.push(monsterId);
-            this.state.addedMonsters.sort();
-        }       
+            this.setState(prevState => ({
+                addedMonsters: [...prevState.addedMonsters, newMonsterValue].sort()
+            }));
+        }
     }
 
     render() {
