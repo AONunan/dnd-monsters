@@ -1,21 +1,6 @@
 import React, {Component} from 'react';
 import monstersJson from './Data/5e-SRD-Monsters.json'
 
-const TableHeader = () => { 
-    return (
-        <thead>
-            <tr>
-                <th>Add</th>
-                <th>Name</th>
-                <th>Type</th>
-                <th>HP</th>
-                <th>AC</th>
-                <th>CR</th>
-            </tr>
-        </thead>
-    );
-}
-
 class TableBody extends Component {
     
     state = {
@@ -23,10 +8,8 @@ class TableBody extends Component {
     };
 
     sortArray = (a, b) => {
-        let sort_key = "challenge_rating";
-        sort_key = "armor_class";
-        sort_key = "name";
-        return (a[sort_key] > b[sort_key]) ? 1 : ((b[sort_key] > a[sort_key]) ? -1 : 0);
+        const sortKey = this.props.sortKey;
+        return (a[sortKey] > b[sortKey]) ? 1 : ((b[sortKey] > a[sortKey]) ? -1 : 0);
     }
    
     render() {
@@ -68,12 +51,25 @@ class TableBody extends Component {
 }
 
 class MonsterTable extends Component {
-    render() {
+    state = {
+        sortKey: "name",
+        sortDirection: 1
+    };
 
+    render() {
         return (
             <table>
-                <TableHeader />
-                <TableBody searchString={this.props.searchString} monsterAdded={this.props.monsterAdded} />
+                <thead>
+                <tr>
+                    <th>Add</th>
+                    <th onClick={() => this.setState({ sortKey: "name" })}>Name</th>
+                    <th onClick={() => this.setState({ sortKey: "type" })}>Type</th>
+                    <th onClick={() => this.setState({ sortKey: "hit_points" })}>HP</th>
+                    <th onClick={() => this.setState({ sortKey: "armor_class" })}>AC</th>
+                    <th onClick={() => this.setState({ sortKey: "challenge_rating" })}>CR</th>
+                    </tr>
+                </thead>
+                <TableBody searchString={this.props.searchString} monsterAdded={this.props.monsterAdded} sortKey={this.state.sortKey} />
             </table>
         );
     }
