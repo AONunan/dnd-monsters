@@ -19,12 +19,17 @@ const TableHeader = () => {
 class TableBody extends Component {
     
     state = {
-        monsters: [],
-        url: "http://www.dnd5eapi.co/api/monsters/"
+        
     };
+
+    sortArray = (a, b) => {
+        let sort_key = "challenge_rating";
+        sort_key = "armor_class";
+        sort_key = "name";
+        return (a[sort_key] > b[sort_key]) ? 1 : ((b[sort_key] > a[sort_key]) ? -1 : 0);
+    }
    
     render() {
-
         let monstersToDisplay = [];
 
         monstersJson.map((value, index) => {
@@ -41,6 +46,9 @@ class TableBody extends Component {
 
         // Filter monsters using searchString, converting both sides to lowercase
         let filteredMonstersToDisplay = monstersToDisplay.filter(monster => monster.name.toLowerCase().includes(this.props.searchString.toLowerCase()));
+
+        filteredMonstersToDisplay.sort( (a, b) => this.sortArray(a, b) );
+        // filteredMonstersToDisplay.sort(function(a,b) {return (a.challenge_rating > b.challenge_rating) ? 1 : ((b.challenge_rating > a.challenge_rating) ? -1 : 0);} );
 
         const rows = filteredMonstersToDisplay.map((monster, index) => {
             return (

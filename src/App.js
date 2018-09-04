@@ -25,9 +25,8 @@ class App extends Component {
         return (
             <div className="App">
                 <h1>D&D Monsters</h1>
-                <MonsterDetails testProp="hellomonsterdetails!" addedMonsters={this.state.addedMonsters} />
+                <MonsterDetails addedMonsters={this.state.addedMonsters} />
                 <SearchBox handleTyping={(text) => this.setState({searchString: text})} />
-                <p>Filter string (App component): {this.state.searchString}</p>
                 <MonsterTable searchString={this.state.searchString} monsterAdded={this.monsterAdded} />
             </div>            
         );
