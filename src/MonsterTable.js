@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import monstersJson from './Data/5e-SRD-Monsters.json'
 
 const TableHeader = () => { 
     return (
@@ -6,7 +7,10 @@ const TableHeader = () => {
             <tr>
                 <th>Add</th>
                 <th>Name</th>
-                <th>URL</th>
+                <th>Type</th>
+                <th>HP</th>
+                <th>AC</th>
+                <th>CR</th>
             </tr>
         </thead>
     );
@@ -18,34 +22,35 @@ class TableBody extends Component {
         monsters: [],
         url: "http://www.dnd5eapi.co/api/monsters/"
     };
-
-    componentDidMount() {
-        fetch(this.state.url)
-        .then(response => response.json())
-        .then(data => {
-            this.setState({
-                monsters: data.results
-            });
-        });
-    }
-    
+   
     render() {
-        const { monsters } = this.state;
+
+        let monstersToDisplay = [];
+
+        monstersJson.map((value, index) => {
+            let monsterObject = {
+                name: value.name,
+                type: value.type,
+                hit_points: value.hit_points,
+                armor_class: value.armor_class,
+                challenge_rating: value.challenge_rating
+            };
+
+            monstersToDisplay.push(monsterObject);
+        });
 
         // Filter monsters using searchString, converting both sides to lowercase
-        let monstersToDisplay = monsters.filter(monster => monster.name.toLowerCase().includes(this.props.searchString.toLowerCase()));
+        let filteredMonstersToDisplay = monstersToDisplay.filter(monster => monster.name.toLowerCase().includes(this.props.searchString.toLowerCase()));
 
-        const rows = monstersToDisplay.map((monster, index) => {
-
-            // Get the unique ID from the end of the URL
-            const urlId = monster.url.split("/").slice(-1)[0];
-            
-            
+        const rows = filteredMonstersToDisplay.map((monster, index) => {
             return (
-                <tr key={urlId}>
-                    <td><button onClick={() => this.props.monsterAdded(urlId)}>+</button></td>
+                <tr key={monster.name}>
+                    <td><button onClick={() => this.props.monsterAdded(monster.name)}>+</button></td>
                     <td>{monster.name}</td>
-                    <td>{monster.url}</td>
+                    <td>{monster.type}</td>
+                    <td>{monster.hit_points}</td>
+                    <td>{monster.armor_class}</td>
+                    <td>{monster.challenge_rating}</td>
                 </tr>
             );
         });

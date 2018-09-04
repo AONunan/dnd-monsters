@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import MonsterDetails from './MonsterDetails'
 import MonsterTable from './MonsterTable'
 import SearchBox from './SearchBox'
+import monstersJson from './Data/5e-SRD-Monsters.json'
 
 class App extends Component {
 
@@ -16,8 +17,7 @@ class App extends Component {
         } else {
             this.state.addedMonsters.push(monsterId);
             this.state.addedMonsters.sort();
-        }
-        
+        }       
     }
 
     render() {
