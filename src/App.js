@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import MonsterDetails from './MonsterDetails'
 import MonsterTable from './MonsterTable'
 import SearchBox from './SearchBox'
+import Footer from './Footer'
 import monstersJson from './Data/5e-SRD-Monsters.json'
 
 class App extends Component {
@@ -28,6 +29,7 @@ class App extends Component {
                 <MonsterDetails addedMonsters={this.state.addedMonsters} />
                 <SearchBox handleTyping={(text) => this.setState({searchString: text})} />
                 <MonsterTable searchString={this.state.searchString} monsterAdded={this.monsterAdded} />
+                <Footer />
             </div>            
         );
     }
