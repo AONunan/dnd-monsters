@@ -24,6 +24,8 @@ const Stats = (props) => {
             <br/>
             <strong>HP: </strong> {props.monster.hit_points}
             <br/>
+            <strong>CR: </strong> {props.monster.challenge_rating}
+            <br/>
             <br/>
             <strong>STR: </strong> {props.monster.strength}
             <br/>

@@ -36,7 +36,7 @@ class TableBody extends Component {
         const rows = filteredMonstersToDisplay.map((monster, index) => {
             return (
                 <tr key={monster.name}>
-                    <td><button type="button" className="btn btn-primary" onClick={() => this.props.monsterAdded(monster.name)}>+</button></td>
+                    <td><button type="button" className="btn btn-primary" onClick={() => this.props.monsterAdded(monster.name)}>+/-</button></td>
                     <td>{monster.name}</td>
                     <td>{monster.type}</td>
                     <td>{monster.hit_points}</td>
@@ -61,7 +61,7 @@ class MonsterTable extends Component {
             <table className="table">
                 <thead>
                 <tr>
-                    <th>Add</th>
+                    <th>Add/Subtract</th>
                     <th onClick={() => this.setState({ sortKey: "name" })}>Name</th>
                     <th onClick={() => this.setState({ sortKey: "type" })}>Type</th>
                     <th onClick={() => this.setState({ sortKey: "hit_points" })}>HP</th>

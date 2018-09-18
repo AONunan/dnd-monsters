@@ -14,8 +14,12 @@ class App extends Component {
 
     monsterAdded = (newMonsterValue) => {
         if(this.state.addedMonsters.includes(newMonsterValue)) {
-            console.log("Monster already in array");
+            // Monster exists. Remove it
+            this.setState(prevState => ({
+                addedMonsters: prevState.addedMonsters.filter((monster) => monster !== newMonsterValue)
+            }));
         } else {
+            // Monster doesn't exist. Add it
             this.setState(prevState => ({
                 addedMonsters: [...prevState.addedMonsters, newMonsterValue].sort()
             }));
