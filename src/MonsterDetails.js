@@ -53,12 +53,12 @@ const ListOfActionsAndAbilities = (props) => {
 
     let items = props.actions.map((action) => {
         return (
-            <li key={action.name} >{action.name}</li>
+            <li className="list-group-item" key={action.name} >{action.name}</li>
         )
     });
 
     return (
-        <ul>
+        <ul className="list-group list-group-flush">
             {items}
         </ul>
     );
@@ -77,22 +77,26 @@ const MonsterDetails = (props) => {
                 <td> <BasicInfo monster={monster} /> </td>
                 <td> <Stats monster={monster} /> </td>
                 <td> <ActionsAndAbilities monster={monster} /> </td>
+                <td> Placeholder </td>
             </tr>
         )
     });
 
     return (
-        <table>
-        <thead>
-        <tr>
-            <th>Name</th>
-            <th>Basic Info</th>
-            <th>Stats</th>
-            <th>Actions and Abilities</th>
-            </tr>
-        </thead>
-        <tbody>{rows}</tbody>
-        </table>
+        <div>
+            <table className="table">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Basic Info</th>
+                    <th>Stats</th>
+                    <th>Actions and Abilities</th>
+                    <th>Special Abilities</th>
+                    </tr>
+                </thead>
+                <tbody>{rows}</tbody>
+            </table>
+        </div>
     );
 }
 

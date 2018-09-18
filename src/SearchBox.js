@@ -7,12 +7,14 @@ class SearchBox extends Component {
 
     render() {
         return (
-            <div>
-                <input type="text" placeholder="Search for a monster" value={this.props.filterString} onChange={(event) => {
-                    const {value} = event.target;
-                    this.props.handleTyping(value);
-                }} />
-            </div>
+            <form>
+                <div className="form-group">
+                    <input type="text" class="form-control" placeholder="Search for a monster" value={this.props.filterString} onChange={(event) => {
+                        const {value} = event.target;
+                        this.props.handleTyping(value);
+                    }} />
+                </div>
+            </form>
         );
         
     }

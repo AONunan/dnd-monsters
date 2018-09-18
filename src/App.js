@@ -25,11 +25,13 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <h1>D&D Monsters</h1>
-                <MonsterDetails addedMonsters={this.state.addedMonsters} />
-                <SearchBox handleTyping={(text) => this.setState({searchString: text})} />
-                <MonsterTable searchString={this.state.searchString} monsterAdded={this.monsterAdded} />
-                <Footer />
+                <div className="container-fluid">
+                    <h1>D&D Monsters</h1>
+                    <MonsterDetails addedMonsters={this.state.addedMonsters} />
+                    <SearchBox handleTyping={(text) => this.setState({searchString: text})} />
+                    <MonsterTable searchString={this.state.searchString} monsterAdded={this.monsterAdded} />
+                    <Footer />
+                </div>
             </div>            
         );
     }
