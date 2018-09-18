@@ -40,20 +40,11 @@ const Stats = (props) => {
     );
 }
 
-const ActionsAndAbilities = (props) => {
-    return (
-        <div>
-            <strong>Actions: </strong> <ListOfActionsAndAbilities actions={props.monster.actions} />
-            <strong>Special abilities: </strong> <ListOfActionsAndAbilities actions={props.monster.special_abilities} />
-        </div>
-    );
-}
-
 const ListOfActionsAndAbilities = (props) => {
 
     let items = props.actions.map((action) => {
         return (
-            <li className="list-group-item" key={action.name} >{action.name}</li>
+            <li className="list-group-item list-group-item-action" key={action.name} >{action.name}</li>
         )
     });
 
@@ -67,7 +58,6 @@ const ListOfActionsAndAbilities = (props) => {
 const MonsterDetails = (props) => {
     let rows = props.addedMonsters.map((monsterName, index) => {
 
-
         let monster = monstersJson.find((object) => object.name === monsterName);
         // console.log("monster:", monster);
 
@@ -76,8 +66,8 @@ const MonsterDetails = (props) => {
                 <td> <em>{monster.name} </em></td>
                 <td> <BasicInfo monster={monster} /> </td>
                 <td> <Stats monster={monster} /> </td>
-                <td> <ActionsAndAbilities monster={monster} /> </td>
-                <td> Placeholder </td>
+                <td> <ListOfActionsAndAbilities actions={monster.actions} /> </td>
+                <td> <ListOfActionsAndAbilities actions={monster.special_abilities} /> </td>
             </tr>
         )
     });
@@ -90,7 +80,7 @@ const MonsterDetails = (props) => {
                     <th>Name</th>
                     <th>Basic Info</th>
                     <th>Stats</th>
-                    <th>Actions and Abilities</th>
+                    <th>Actions</th>
                     <th>Special Abilities</th>
                     </tr>
                 </thead>
