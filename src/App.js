@@ -18,6 +18,7 @@ class App extends Component {
             this.setState(prevState => ({
                 addedMonsters: prevState.addedMonsters.filter((monster) => monster !== newMonsterValue)
             }));
+
         } else {
             // Monster doesn't exist. Add it
             this.setState(prevState => ({

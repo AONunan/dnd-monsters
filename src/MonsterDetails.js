@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactTooltip from 'react-tooltip'
 import monstersJson from './Data/5e-SRD-Monsters.json'
 
 const BasicInfo = (props) => {
@@ -46,7 +47,7 @@ const ListOfActionsAndAbilities = (props) => {
 
     let items = props.actions.map((action) => {
         return (
-            <li className="list-group-item list-group-item-action" key={action.name} >{action.name}</li>
+            <li className="list-group-item list-group-item-action" key={action.name} data-tip={action.desc} >{action.name}</li>
         )
     });
 
@@ -69,13 +70,14 @@ const MonsterDetails = (props) => {
                 <td> <BasicInfo monster={monster} /> </td>
                 <td> <Stats monster={monster} /> </td>
                 <td> <ListOfActionsAndAbilities actions={monster.actions} /> </td>
-                <td> <ListOfActionsAndAbilities actions={monster.special_abilities} /> </td>
+                <td> <ReactTooltip /> <ListOfActionsAndAbilities actions={monster.special_abilities} /> </td>
             </tr>
         )
     });
 
     return (
         <div>
+            
             <table className="table">
                 <thead>
                 <tr>
