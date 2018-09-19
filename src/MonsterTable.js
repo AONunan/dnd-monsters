@@ -36,7 +36,21 @@ class TableBody extends Component {
         const rows = filteredMonstersToDisplay.map((monster, index) => {
             return (
                 <tr key={monster.name}>
-                    <td><button type="button" className="btn btn-primary" onClick={() => this.props.monsterAdded(monster.name)}>+/-</button></td>
+                    <td><button id={"button-"+monster.name} type="button" className="btn btn-block btn-primary" onClick={() => {
+                        this.props.monsterAdded(monster.name);
+                        //document.getElementsByClassName("btn")[0].style.color="red";
+
+                        if(document.getElementById("button-"+monster.name).innerText === "Add monster") {
+                            document.getElementById("button-"+monster.name).classList.remove("btn-primary");
+                            document.getElementById("button-"+monster.name).classList.add("btn-danger");
+                            document.getElementById("button-"+monster.name).innerText = "Remove monster";
+                        } else {
+                            document.getElementById("button-"+monster.name).classList.remove("btn-danger");
+                            document.getElementById("button-"+monster.name).classList.add("btn-primary");
+                            document.getElementById("button-"+monster.name).innerText = "Add monster";
+                        }
+
+                    }}>Add monster</button></td>
                     <td>{monster.name}</td>
                     <td>{monster.type}</td>
                     <td>{monster.hit_points}</td>
