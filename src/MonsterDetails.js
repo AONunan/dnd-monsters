@@ -18,7 +18,17 @@ const BasicInfo = (props) => {
     );
 }
 
+const statModifier = (stat) => {
+    // default value
+    if (stat == null) stat = "10"
+
+    let modifier = Math.floor((Number(stat) - 10) / 2); // convert stat to modifier
+    
+    return stat + " (" + (modifier > 0 ? "+" : "") + modifier + ")"; // return in form: "15 (+2)"
+}
+
 const Stats = (props) => {
+
     return (
         <div>
             <strong>AC: </strong> {props.monster.armor_class}
@@ -28,17 +38,17 @@ const Stats = (props) => {
             <strong>CR: </strong> {props.monster.challenge_rating}
             <br/>
             <br/>
-            <strong>STR: </strong> {props.monster.strength}
+            <strong>STR: </strong> {props.statModifier(props.monster.strength)}
             <br/>
-            <strong>DEX: </strong> {props.monster.dexterity}
+            <strong>DEX: </strong> {props.statModifier(props.monster.dexterity)}
             <br/>
-            <strong>CON: </strong> {props.monster.constitution}
+            <strong>CON: </strong> {props.statModifier(props.monster.constitution)}
             <br/>
-            <strong>INT: </strong> {props.monster.intelligence}
+            <strong>INT: </strong> {props.statModifier(props.monster.intelligence)}
             <br/>
-            <strong>WIS: </strong> {props.monster.wisdom}
+            <strong>WIS: </strong> {props.statModifier(props.monster.wisdom)}
             <br/>
-            <strong>CHA: </strong> {props.monster.charisma}
+            <strong>CHA: </strong> {props.statModifier(props.monster.charisma)}
         </div>
     );
 }
@@ -68,7 +78,7 @@ const MonsterDetails = (props) => {
             <tr key={index}>
                 <td> <em>{monster.name} </em></td>
                 <td> <BasicInfo monster={monster} /> </td>
-                <td> <Stats monster={monster} /> </td>
+                <td> <Stats monster={monster} statModifier={statModifier} /> </td>
                 <td> <ListOfActionsAndAbilities actions={monster.actions} /> </td>
                 <td> <ReactTooltip /> <ListOfActionsAndAbilities actions={monster.special_abilities} /> </td>
             </tr>
