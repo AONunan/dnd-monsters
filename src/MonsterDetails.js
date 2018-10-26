@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import ReactTooltip from 'react-tooltip'
 import monstersJson from './Data/5e-SRD-Monsters.json'
 
@@ -73,39 +73,57 @@ const ListOfActionsAndAbilities = (props) => {
     );
 }
 
-const MonsterDetails = (props) => {
-    let rows = props.addedMonsters.map((monsterName, index) => {
+class MonsterDetails extends Component {
+    render() {
+        let rows = this.props.addedMonsters.map((monsterName, index) => {
 
-        let monster = monstersJson.find((object) => object.name === monsterName);
+            let monster = monstersJson.find((object) => object.name === monsterName);
+
+            return (
+                <tr key={index}>
+                    <td> <button id={"button-"+monster.name} type="button" className="btn btn-block btn-primary" onClick={() => {
+                        this.props.monsterAdded(monster.name);
+                        //document.getElementsByClassName("btn")[0].style.color="red";
+
+                        if(document.getElementById("button-"+monster.name).innerText === "Add monster") {
+                            document.getElementById("button-"+monster.name).classList.remove("btn-primary");
+                            document.getElementById("button-"+monster.name).classList.add("btn-danger");
+                            document.getElementById("button-"+monster.name).innerText = "Remove monster";
+                        } else {
+                            document.getElementById("button-"+monster.name).classList.remove("btn-danger");
+                            document.getElementById("button-"+monster.name).classList.add("btn-primary");
+                            document.getElementById("button-"+monster.name).innerText = "Add monster";
+                        }
+
+                    }}>Add monster</button> </td>
+                    <td> <em>{monster.name} </em></td>
+                    <td> <BasicInfo monster={monster} /> </td>
+                    <td> <Stats monster={monster} statModifier={statModifier} /> </td>
+                    <td> <ListOfActionsAndAbilities actions={monster.actions} /> </td>
+                    <td> <ReactTooltip /> <ListOfActionsAndAbilities actions={monster.special_abilities} /> </td>
+                </tr>
+            )
+        });
 
         return (
-            <tr key={index}>
-                <td> <em>{monster.name} </em></td>
-                <td> <BasicInfo monster={monster} /> </td>
-                <td> <Stats monster={monster} statModifier={statModifier} /> </td>
-                <td> <ListOfActionsAndAbilities actions={monster.actions} /> </td>
-                <td> <ReactTooltip /> <ListOfActionsAndAbilities actions={monster.special_abilities} /> </td>
-            </tr>
-        )
-    });
-
-    return (
-        <div>
-            
-            <table className="table">
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Basic Info</th>
-                    <th>Stats</th>
-                    <th>Actions</th>
-                    <th>Special Abilities</th>
-                    </tr>
-                </thead>
-                <tbody>{rows}</tbody>
-            </table>
-        </div>
-    );
+            <div>
+                
+                <table className="table">
+                    <thead>
+                    <tr>
+                        <th>Remove</th>
+                        <th>Name</th>
+                        <th>Basic Info</th>
+                        <th>Stats</th>
+                        <th>Actions</th>
+                        <th>Special Abilities</th>
+                        </tr>
+                    </thead>
+                    <tbody>{rows}</tbody>
+                </table>
+            </div>
+        );
+    }
 }
 
 export default MonsterDetails;

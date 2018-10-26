@@ -32,7 +32,7 @@ class App extends Component {
             <div className="App">
                 <div className="container-fluid">
                     <h1>D&D Monsters</h1>
-                    <MonsterDetails addedMonsters={this.state.addedMonsters} />
+                    <MonsterDetails addedMonsters={this.state.addedMonsters} monsterAdded={this.monsterAdded} />
                     <SearchBox handleTyping={(text) => this.setState({searchString: text})} />
                     <MonsterTable searchString={this.state.searchString} monsterAdded={this.monsterAdded} />
                     <Footer />
