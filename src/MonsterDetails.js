@@ -55,11 +55,16 @@ const Stats = (props) => {
 
 const ListOfActionsAndAbilities = (props) => {
 
-    let items = props.actions.map((action) => {
-        return (
-            <li className="list-group-item list-group-item-action" key={action.name} data-tip={action.desc} >{action.name}</li>
-        )
-    });
+    let items = null;
+
+    // Check first that actions or special abilities exist
+    if (props.actions != null) {
+        items = props.actions.map((action) => {
+            return (
+                <li className="list-group-item list-group-item-action" key={action.name} data-tip={action.desc} >{action.name}</li>
+            )
+        });
+    }
 
     return (
         <ul className="list-group list-group-flush">
@@ -72,7 +77,6 @@ const MonsterDetails = (props) => {
     let rows = props.addedMonsters.map((monsterName, index) => {
 
         let monster = monstersJson.find((object) => object.name === monsterName);
-        // console.log("monster:", monster);
 
         return (
             <tr key={index}>
