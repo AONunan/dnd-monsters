@@ -37,10 +37,10 @@ class TableBody extends Component {
             return (
                 <tr key={monster.name}>
                     <td><button id={"button-"+monster.name} type="button" className="btn btn-block btn-primary" onClick={() => {
-                        this.props.monsterAdded(monster.name);
+                        this.props.addOrRemoveMonster(monster.name);
                         //document.getElementsByClassName("btn")[0].style.color="red";
 
-                        if(document.getElementById("button-"+monster.name).innerText === "Add monster") {
+                        /*if(document.getElementById("button-"+monster.name).innerText === "Add monster") {
                             document.getElementById("button-"+monster.name).classList.remove("btn-primary");
                             document.getElementById("button-"+monster.name).classList.add("btn-danger");
                             document.getElementById("button-"+monster.name).innerText = "Remove monster";
@@ -48,9 +48,9 @@ class TableBody extends Component {
                             document.getElementById("button-"+monster.name).classList.remove("btn-danger");
                             document.getElementById("button-"+monster.name).classList.add("btn-primary");
                             document.getElementById("button-"+monster.name).innerText = "Add monster";
-                        }
+                        }*/
 
-                    }}>Add monster</button></td>
+                    }}>+/-</button></td>
                     <td>{monster.name}</td>
                     <td>{monster.type}</td>
                     <td>{monster.hit_points}</td>
@@ -83,7 +83,7 @@ class MonsterTable extends Component {
                     <th onClick={() => this.setState({ sortKey: "challenge_rating" })}>CR</th>
                     </tr>
                 </thead>
-                <TableBody searchString={this.props.searchString} monsterAdded={this.props.monsterAdded} sortKey={this.state.sortKey} />
+                <TableBody searchString={this.props.searchString} addOrRemoveMonster={this.props.addOrRemoveMonster} sortKey={this.state.sortKey} />
             </table>
         );
     }

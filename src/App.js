@@ -9,20 +9,20 @@ class App extends Component {
 
     state = {
         searchString: "",
-        addedMonsters: []
+        addedMonstersList: []
     };
 
-    monsterAdded = (newMonsterValue) => {
-        if(this.state.addedMonsters.includes(newMonsterValue)) {
+    addOrRemoveMonster = (newMonsterValue) => {
+        if(this.state.addedMonstersList.includes(newMonsterValue)) {
             // Monster exists. Remove it
             this.setState(prevState => ({
-                addedMonsters: prevState.addedMonsters.filter((monster) => monster !== newMonsterValue)
+                addedMonstersList: prevState.addedMonstersList.filter((monster) => monster !== newMonsterValue)
             }));
 
         } else {
             // Monster doesn't exist. Add it
             this.setState(prevState => ({
-                addedMonsters: [...prevState.addedMonsters, newMonsterValue].sort()
+                addedMonstersList: [...prevState.addedMonstersList, newMonsterValue].sort()
             }));
         }
     }
@@ -32,9 +32,9 @@ class App extends Component {
             <div className="App">
                 <div className="container-fluid">
                     <h1>D&D Monsters</h1>
-                    <MonsterDetails addedMonsters={this.state.addedMonsters} monsterAdded={this.monsterAdded} />
+                    <MonsterDetails addedMonstersList={this.state.addedMonstersList} addOrRemoveMonster={this.addOrRemoveMonster} />
                     <SearchBox handleTyping={(text) => this.setState({searchString: text})} />
-                    <MonsterTable searchString={this.state.searchString} monsterAdded={this.monsterAdded} />
+                    <MonsterTable searchString={this.state.searchString} addOrRemoveMonster={this.addOrRemoveMonster} />
                     <Footer />
                 </div>
             </div>            

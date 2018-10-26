@@ -19,11 +19,8 @@ const BasicInfo = (props) => {
 }
 
 const statModifier = (stat) => {
-    // default value
-    if (stat == null) stat = "10"
-
+    if (stat == null) stat = "10"; // default value
     let modifier = Math.floor((Number(stat) - 10) / 2); // convert stat to modifier
-    
     return stat + " (" + (modifier > 0 ? "+" : "") + modifier + ")"; // return in form: "15 (+2)"
 }
 
@@ -75,27 +72,15 @@ const ListOfActionsAndAbilities = (props) => {
 
 class MonsterDetails extends Component {
     render() {
-        let rows = this.props.addedMonsters.map((monsterName, index) => {
+        let rows = this.props.addedMonstersList.map((monsterName, index) => {
 
             let monster = monstersJson.find((object) => object.name === monsterName);
 
             return (
                 <tr key={index}>
                     <td> <button id={"button-"+monster.name} type="button" className="btn btn-block btn-primary" onClick={() => {
-                        this.props.monsterAdded(monster.name);
-                        //document.getElementsByClassName("btn")[0].style.color="red";
-
-                        if(document.getElementById("button-"+monster.name).innerText === "Add monster") {
-                            document.getElementById("button-"+monster.name).classList.remove("btn-primary");
-                            document.getElementById("button-"+monster.name).classList.add("btn-danger");
-                            document.getElementById("button-"+monster.name).innerText = "Remove monster";
-                        } else {
-                            document.getElementById("button-"+monster.name).classList.remove("btn-danger");
-                            document.getElementById("button-"+monster.name).classList.add("btn-primary");
-                            document.getElementById("button-"+monster.name).innerText = "Add monster";
-                        }
-
-                    }}>Add monster</button> </td>
+                        this.props.addOrRemoveMonster(monster.name);
+                    }}>+/-</button> </td>
                     <td> <em>{monster.name} </em></td>
                     <td> <BasicInfo monster={monster} /> </td>
                     <td> <Stats monster={monster} statModifier={statModifier} /> </td>
@@ -107,7 +92,6 @@ class MonsterDetails extends Component {
 
         return (
             <div>
-                
                 <table className="table">
                     <thead>
                     <tr>
